@@ -10,7 +10,9 @@ class PreferencesWindowController: NSWindowController {
         //      This wont happen with every call
         //      Only the first call
         self.window?.center()
-        
+        if let preferencesViewController = contentViewController as? PreferencesViewController {
+            preferencesViewController.autoResizeWindow(preferencesViewController.tabView.selectedTabViewItem)
+        }
     }
     
     @IBAction func resetPreferencesFirstResponderAction(_ sender: AnyObject?){
