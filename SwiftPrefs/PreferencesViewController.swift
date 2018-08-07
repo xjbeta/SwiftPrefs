@@ -10,27 +10,27 @@ class PreferencesViewController: NSTabViewController {
     
     override func tabView(_ tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?) {
         super.tabView(tabView, willSelect: tabViewItem)
-        autoResizeWindow(tabViewItem)
+        autoResizeWindow(tabViewItem, animate: true)
     }
     
-    func autoResizeWindow(_ tabViewItem: NSTabViewItem?) {
+    func autoResizeWindow(_ tabViewItem: NSTabViewItem?, animate: Bool) {
         if let title = tabViewItem?.label {
             if !originalSizes.keys.contains(title) {
                 originalSizes[title] = tabViewItem?.view?.frame.size
             }
             if let size = originalSizes[title], let window = view.window {
-                window.autoResize(toFill: size)
+                window.autoResize(toFill: size, animate: animate)
             }
         }
     }
 }
 
 extension NSWindow {
-    func autoResize(toFill size: CGSize) {
+    func autoResize(toFill size: CGSize, animate: Bool) {
         let contentFrame = frameRect(forContentRect: CGRect(origin: .zero, size: size))
         var frame = self.frame
         frame.origin.y = frame.origin.y + (frame.size.height - contentFrame.size.height)
         frame.size = contentFrame.size
-        setFrame(frame, display: false, animate: true)
+        setFrame(frame, display: false, animate: animate)
     }
 }

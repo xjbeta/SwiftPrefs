@@ -11,7 +11,7 @@ class PreferencesWindowController: NSWindowController {
         //      Only the first call
         self.window?.center()
         if let preferencesViewController = contentViewController as? PreferencesViewController {
-            preferencesViewController.autoResizeWindow(preferencesViewController.tabView.selectedTabViewItem)
+            preferencesViewController.autoResizeWindow(preferencesViewController.tabView.selectedTabViewItem, animate: false)
         }
     }
     
